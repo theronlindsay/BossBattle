@@ -1,4 +1,6 @@
-Boss Battle Sample
+Boss Battle Project
+BUILDS CAN BE FOUND IN BUILD FOLDER
+
 
 Physics Based Movement
 
@@ -11,8 +13,6 @@ Attack the Weakpoints for the first phase
 Shoot the boss without getting smacked by the staff
 
 Platform on moving platforms to jump on the boss
-
-
 
 # Input
 
@@ -31,7 +31,6 @@ Right Click - Aim Down Sights
 Hold Shift - Sprint
 
 CTRL - Slide
-
 
 **Gamepad:**
 
