@@ -20,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die(){
         Debug.Log("Player has died");
+        Camera.main.backgroundColor = Color.black;
+        GetComponent<PlayerController>().enabled = false;
         restartButton.gameObject.SetActive(true);
     }
 }

@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         // sensitivitySlider = GameObject.Find("Sensitivity");
         // quit = GameObject.Find("QuitButton");
 
-        Debug.Log(sensitivitySlider);
+        //Debug.Log(sensitivitySlider);
 
 
         if (canToggleMenu)
@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
             thirdPersonCam.SetActive(true);
             firstPersonCam.SetActive(false);
         } else {
-            Debug.Log("From toggleAim() in PlayerController: Camera already active");
+            //Debug.Log("From toggleAim() in PlayerController: Camera already active");
         }
     }
 

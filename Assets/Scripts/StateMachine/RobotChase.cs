@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,8 +13,11 @@ public RobotChase(RobotStateController rsc) : base(rsc){}
         rsc.scanner.GetComponent<Renderer>().material = rsc.red;
         rsc.GetComponent<NavMeshAgent>().isStopped = false;
 
-    }
+        //Deactive the shield
+        rsc.shield.SetActive(false);
 
+    }
+    
     public override void CheckTransitions(){
         //If the player is not in sight, go back to working
         RaycastHit hit;
@@ -42,9 +46,6 @@ public RobotChase(RobotStateController rsc) : base(rsc){}
     {
         //Move towards the player
         rsc.GetComponent<NavMeshAgent>().SetDestination(rsc.player.transform.position);
-
-
-
     }
 
     public override void OnStateExit()

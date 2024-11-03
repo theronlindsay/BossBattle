@@ -1,4 +1,5 @@
-    using System.Collections.Generic;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class RobotStateController : MonoBehaviour
     public Material black;
 
     public GameObject floatingPlatforms;    
+    public GameObject shield;
 
 
     public bool debug = false;
@@ -32,7 +34,7 @@ public class RobotStateController : MonoBehaviour
         robotCollider = GetComponent<Collider>();
         currentDestination = RandomDestination(); 
        
-        SetState(new RobotWorking(this));
+        SetState(new RobotSleeping(this));
     }
 
     public Transform RandomDestination(){
@@ -43,14 +45,22 @@ public class RobotStateController : MonoBehaviour
     }
 
     public void OnCollisionEnter(Collision collision){
+        //If the current state is sleeping, return
+        if(currentState is RobotSleeping){
+            return;
+        }
+
+
         if(collision.gameObject.tag == "Bullet"){
             //Take damage
-            Debug.Log("Robot Hit: " + collision.gameObject.GetComponent<bullet>().damage + " Health: " + robotHealth);  
+            //Debug.Log("Robot Hit: " + collision.gameObject.GetComponent<bullet>().damage + " Health: " + robotHealth);  
             float damage = collision.gameObject.GetComponent<bullet>().damage;
             robotHealth -= damage;
             healthBar.value = robotHealth;
-            if(robotHealth <= 25 && robotHealth > 5){
+            if(robotHealth <= 4 && robotHealth > 0){
                 SetState(new RobotFrozen(this));    
+            } else {
+                SetState(new RobotChase(this));
             }
         }
     }
@@ -84,6 +94,10 @@ public class RobotStateController : MonoBehaviour
         player.GetComponent<PlayerHealth>().TakeDamage(1);
 
         //If the player is still alive, go back to chasing
+        SetState(new RobotChase(this));
+    }
+
+    public void SetStateToChase(){
         SetState(new RobotChase(this));
     }
 }

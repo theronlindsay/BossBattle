@@ -1,14 +1,22 @@
-Custom Multiplayer Player Controller
+Boss Battle Sample
 
-- Physics Based Movement
-- Easily interact with other rigidbodies
-- Player position and Bullets synced between clients
-- 1 player per client
-- Keyboard and Mouse and Gamepad are supported
+Physics Based Movement
+
+Easily interact with other rigidbodies
+
+Keyboard and Mouse and Gamepad are supported
+
+Attack the Weakpoints for the first phase
+
+Shoot the boss without getting smacked by the staff
+
+Platform on moving platforms to jump on the boss
+
+
 
 # Input
 
-Keyboard and Mouse:
+**Keyboard and Mouse:**
 
 WASD - Move
 
@@ -25,7 +33,7 @@ Hold Shift - Sprint
 CTRL - Slide
 
 
-Gamepad:
+**Gamepad:**
 
 Left Stick - Move
 

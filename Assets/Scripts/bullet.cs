@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class bullet : MonoBehaviour
@@ -46,7 +43,7 @@ public class bullet : MonoBehaviour
 
 
     //on collision
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         //Disable the bullet
         gameObject.SetActive(false);
@@ -67,7 +64,7 @@ public class bullet : MonoBehaviour
     public void SetStats(float damage, float range){
         this.damage = damage;
         this.range = range;
-        Debug.Log("Bullet Stats Set: Damage: " + damage + " Range: " + range);
+        //Debug.Log("Bullet Stats Set: Damage: " + damage + " Range: " + range);
     }
 
   

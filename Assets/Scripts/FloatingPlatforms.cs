@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingPlatforms : MonoBehaviour
 {
+
+    public GameObject shield;
+    public TMPro.TextMeshProUGUI text;
 
     public List<GameObject> platforms = new List<GameObject>();
     public GameObject gameMap;
@@ -43,11 +47,27 @@ public class FloatingPlatforms : MonoBehaviour
 
     //Make circle from platforms and animate to new positions (this is made by copilot)
     public void MakeCircle(){
-        StartCoroutine(AnimatePlatformsToCircle());
+        Invoke("MovePlatformsAnimation", 4);  
+    }
+
+    public void MovePlatformsAnimation(){
+
+        //turn on shield
+        shield.SetActive(true);
+
+        Animator animator = GetComponent<Animator>();
+        //Emable the animator
+        animator.enabled = true;
+        animator.SetBool("MovePlatforms", true);
+
+        text = GameObject.Find("HUDText").GetComponent<TMPro.TextMeshProUGUI>();
+
+        text.text = "Step on him!";
+
     }
 
     private IEnumerator AnimatePlatformsToCircle(){
-        float duration = 2.0f; // Duration of the animation
+        float duration = 5.0f; // Duration of the animation
         float elapsedTime = 0.0f;
 
         Vector3[] startPositions = new Vector3[platforms.Count];
@@ -103,9 +123,9 @@ public class FloatingPlatforms : MonoBehaviour
         LevelPlatforms();
 
 
-        Invoke("MakeCircle", 3);
+        MakeCircle();
 
-        Invoke("DisableGameMap", 5);    
+        Invoke("DisableGameMap", 8);    
 
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Platforms
+  - WeakPoint
   layers:
   - Default
   - TransparentFX
@@ -13,12 +15,12 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
+  - Shield
+  - Enemy
   - 
   - 
   - whatIsGround
-  - 
+  - Platforms
   - 
   - 
   - 

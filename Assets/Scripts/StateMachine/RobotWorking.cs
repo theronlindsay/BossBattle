@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RobotWorking : RobotState
 {
+
+    private float cooldown = 5f;
     public RobotWorking(RobotStateController rsc) : base(rsc){}
 
     public override void OnStateEnter()
@@ -23,7 +26,13 @@ public class RobotWorking : RobotState
                 if(rsc.debug){
                     Debug.Log("Player is not in sight");
                 }
-                rsc.SetState(new RobotSleeping(rsc));
+                if(cooldown > 0){
+                    cooldown -= Time.deltaTime;
+                    return;
+                } else {
+                    cooldown = 5f;
+                    rsc.SetState(new RobotSleeping(rsc));
+                }
             } else {
                 if(rsc.debug){
                     Debug.Log("Player is in sight");
@@ -44,6 +53,21 @@ public class RobotWorking : RobotState
         }
 
 
+    }
+
+        public void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.tag == "Bullet"){
+            //Take damage
+            //Debug.Log("Robot Hit: " + collision.gameObject.GetComponent<bullet>().damage + " Health: " + robotHealth);  
+            float damage = collision.gameObject.GetComponent<bullet>().damage;
+            rsc.robotHealth -= damage;
+            rsc.healthBar.value = rsc.robotHealth;
+            if(rsc.robotHealth <= 16 && rsc.robotHealth > 0){
+                rsc.SetState(new RobotFrozen(rsc));    
+            } else {
+                rsc.SetState(new RobotChase(rsc));
+            }
+        }
     }
 
     public override void OnStateExit()

@@ -16,8 +16,10 @@ public class RobotSleeping : RobotState
     // Currently the AI will ignore the player if they are in sight, but not if they are close
     public override void CheckTransitions(){
         float dist = Vector3.Distance(rsc.transform.position, rsc.player.transform.position);
-        if(dist < 5f){
-            rsc.SetState(new RobotWorking(rsc)); 
+        
+        //when health reaches 2/3 transition to working
+        if(rsc.robotHealth <= (rsc.robotHealth/3*2)){
+            rsc.SetState(new RobotWorking(rsc));
         }
     }
 
